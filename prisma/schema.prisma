@@ -12,3 +12,13 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model Men {
+  id          Int    @id @default(autoincrement())
+  name        String
+  description String
+  dressLength Int
+  colors      String
+  size        String
+  quantity    Int    @default(1)
+}
