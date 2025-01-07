@@ -1,5 +1,9 @@
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
-  return <Button>Click Me</Button>;
+  return (
+    <>
+      <h1>Start to work on the home page</h1>
+    </>
+  );
 }
