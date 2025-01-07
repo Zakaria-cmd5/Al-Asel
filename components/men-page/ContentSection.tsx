@@ -5,9 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { MdOutlineShoppingCart } from "react-icons/md";
 
-const ContentSection = () => {
+const ContentSection = ({ isVertical }: { isVertical?: boolean }) => {
   return (
-    <div className="flex flex-col gap-40">
+    <div className={`flex ${isVertical ? " flex-row" : "flex-col"} gap-40`}>
       <div className="flex flex-col items-center justify-center">
         <Image src={manImage} alt="Man" />
 
