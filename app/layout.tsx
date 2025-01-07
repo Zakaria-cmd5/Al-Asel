@@ -1,3 +1,4 @@
+import Navbar from "@/components/navigation/Navbar";
 import SocialNav from "@/components/navigation/SocialNav";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -29,6 +30,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <SocialNav />
+        <Navbar />
         <main>{children}</main>
       </body>
     </html>
