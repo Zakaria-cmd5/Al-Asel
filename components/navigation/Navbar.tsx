@@ -1,8 +1,10 @@
 import logo from "@/public/logo/aseel-black.png";
 import Image from "next/image";
 import Link from "next/link";
-import { CiMenuKebab } from "react-icons/ci";
+import { CiHeart, CiMenuKebab, CiSearch } from "react-icons/ci";
 import { FaHome } from "react-icons/fa";
+import { GoPerson } from "react-icons/go";
+import { MdOutlineShoppingCart } from "react-icons/md";
 
 const Navbar = () => {
   const navItem = [
@@ -15,33 +17,62 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="mt-5 ml-[126px] flex items-center">
-      {/* logo image */}
-      <Image src={logo} alt="Logo" width={100} height={100} />
+    <div className="flex flex-col">
+      {/* the logo and nav items */}
+      <div className="mt-5 ml-[126px] flex items-center">
+        {/* logo image */}
+        <Image src={logo} alt="Logo" width={110} height={110} className="relative top-3"/>
 
-      <div className="flex items-center gap-8 font-bold">
-        {/* home item */}
-        <Link href="/" className="flex gap-1 items-center ml-20">
-          <FaHome />
-          <p>Home</p>
-        </Link>
+        <div className="flex items-center gap-8 font-bold">
+          {/* home item */}
+          <Link href="/" className="flex gap-1 items-center ml-20">
+            <FaHome />
+            <p>Home</p>
+          </Link>
 
-        {/* the rest of items */}
-        <ul className="flex items-center gap-8">
-          {navItem.map((item) => (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                className="hover:text-amber-800 transition-colors duration-150"
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+          {/* the rest of items */}
+          <ul className="flex items-center gap-8">
+            {navItem.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className="hover:text-amber-800 transition-colors duration-150"
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
 
-        {/* the menu item */}
-        <CiMenuKebab className="text-4xl rotate-90 ml-10" />
+          {/* the menu item */}
+          <CiMenuKebab className="text-4xl rotate-90 ml-10" />
+        </div>
+      </div>
+
+      {/* the searchbar and the signup/signin */}
+      <div className="ml-[310px] flex items-center space-x-4">
+        {/* the searchbar */}
+        <div className="relative">
+          <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+            <CiSearch />
+          </div>
+          <input
+            type="text"
+            placeholder="Search..."
+            className="bg-white text-black border-2 border-black w-[800px] text-lg ps-10 px-2.5 py-0.5 focus:outline-none"
+          />
+        </div>
+
+        {/* signup and the cart */}
+        <div className="flex items-center space-x-4 gap-5">
+          <Link href="/signup" className="flex items-center gap-1 ml-10">
+            <GoPerson className="text-2xl"/>
+            Signup / Signin
+          </Link>
+
+          <MdOutlineShoppingCart className="text-2xl"/>
+          <CiHeart className="text-2xl"/>
+        </div>
       </div>
     </div>
   );
