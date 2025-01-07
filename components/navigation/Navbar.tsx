@@ -19,9 +19,9 @@ const Navbar = () => {
   return (
     <div className="flex flex-col">
       {/* the logo and nav items */}
-      <div className="mt-5 ml-[126px] flex items-center">
+      <div className="mt-1 ml-[126px] flex items-center">
         {/* logo image */}
-        <Image src={logo} alt="Logo" width={110} height={110} className="relative top-3"/>
+        <Image src={logo} alt="Logo" width={110} height={110} className="relative top-4"/>
 
         <div className="flex items-center gap-8 font-bold">
           {/* home item */}
