@@ -21,5 +21,6 @@ model Men {
   dressLength String
   colors      String
   size        String
+  price       Int
   quantity    Int    @default(1)
 }

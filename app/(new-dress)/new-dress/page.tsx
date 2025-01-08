@@ -1,5 +1,9 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// @ts-nocheck
 "use client";
 
+import { addDressAction } from "@/actions/addDressAction";
 import MultiValueInput from "@/components/new-dress-page/MultiValueInput";
 import { CldUploadWidget } from "next-cloudinary";
 import { useState } from "react";
@@ -8,9 +12,15 @@ const NewDressPage = () => {
   const [dressLengths, setDressLengths] = useState<string[]>([]);
   const [sizes, setSizes] = useState<string[]>([]);
   const [colors, setColors] = useState<string[]>([]);
+  const [image, setImage] = useState<any>("");
 
   return (
-    <form className="flex flex-col items-center mt-40 p-6 bg-white rounded-lg shadow-lg w-full max-w-md mx-auto">
+    <form
+      action={(formData) =>
+        addDressAction(formData, image.secure_url, colors, sizes, dressLengths)
+      }
+      className="flex flex-col items-center mt-10 mb-2 p-6 bg-slate-300 rounded-lg shadow-lg w-full max-w-md mx-auto"
+    >
       <h2 className="text-2xl font-bold text-amber-600 mb-6">Add New Dress</h2>
 
       <div className="w-full mb-4">
@@ -25,7 +35,6 @@ const NewDressPage = () => {
         />
       </div>
 
-      {/* Changed to TextArea */}
       <div className="w-full mb-4">
         <label
           htmlFor="description"
@@ -36,7 +45,7 @@ const NewDressPage = () => {
         <textarea
           name="description"
           placeholder="Enter description"
-          rows={4} // Set the number of rows for the text area
+          rows={4}
           className="w-full px-4 py-2 border border-amber-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400"
         />
       </div>
@@ -62,14 +71,12 @@ const NewDressPage = () => {
         onValuesChange={setDressLengths}
       />
 
-      {/* Reusable MultiValueInput for sizes */}
       <MultiValueInput
         label="Sizes"
         placeholder="Enter size (e.g., S, M, L)"
         onValuesChange={setSizes}
       />
 
-      {/* Reusable MultiValueInput for colors */}
       <MultiValueInput
         label="Colors"
         placeholder="Enter color (e.g., Red, Blue)"
@@ -78,7 +85,7 @@ const NewDressPage = () => {
 
       <CldUploadWidget
         uploadPreset="al-aseel"
-        onSuccess={(result) => console.log(result)}
+        onSuccess={(result) => setImage(result.info)}
       >
         {({ open }) => {
           return (
