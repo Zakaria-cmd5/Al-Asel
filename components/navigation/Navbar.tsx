@@ -1,10 +1,18 @@
 import logo from "@/public/logo/aseel-black.png";
+import {
+  ClerkLoaded,
+  ClerkLoading,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { CiHeart, CiMenuKebab, CiSearch } from "react-icons/ci";
 import { FaHome } from "react-icons/fa";
 import { GoPerson } from "react-icons/go";
 import { MdOutlineShoppingCart } from "react-icons/md";
+import Spinner from "../loading/Spinner";
 
 const Navbar = () => {
   const navItem = [
@@ -21,7 +29,13 @@ const Navbar = () => {
       {/* the logo and nav items */}
       <div className="mt-1 ml-[126px] flex items-center">
         {/* logo image */}
-        <Image src={logo} alt="Logo" width={110} height={110} className="relative top-4"/>
+        <Image
+          src={logo}
+          alt="Logo"
+          width={110}
+          height={110}
+          className="relative top-4"
+        />
 
         <div className="flex items-center gap-8 font-bold">
           {/* home item */}
@@ -65,13 +79,30 @@ const Navbar = () => {
 
         {/* signup and the cart */}
         <div className="flex items-center space-x-4 gap-5">
-          <Link href="/signup" className="flex items-center gap-1 ml-10">
-            <GoPerson className="text-2xl"/>
-            Signup / Signin
-          </Link>
+          {/* if we are loading render a spinner */}
+          <ClerkLoading>
+            <Spinner />
+          </ClerkLoading>
 
-          <MdOutlineShoppingCart className="text-2xl"/>
-          <CiHeart className="text-2xl"/>
+          {/* if we are loaded render the auth */}
+          <ClerkLoaded>
+            {/* if we are SignedIn render the user information */}
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+
+            {/* if we signed out render the signin/signup */}
+            <SignedOut>
+              <Link href="/sign-up" className="flex items-center gap-1 ml-10">
+                <GoPerson className="text-2xl" />
+                Signup / Signin
+              </Link>
+            </SignedOut>
+          </ClerkLoaded>
+
+          {/* render the cart and favorite buttons */}
+          <MdOutlineShoppingCart className="text-2xl" />
+          <CiHeart className="text-2xl" />
         </div>
       </div>
     </div>
