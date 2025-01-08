@@ -4,7 +4,7 @@ const ContactPage = () => {
       <h1 className="text-4xl font-bold text-center mb-8 text-amber-600">
         Contact Us
       </h1>
-      <form className="w-full max-w-2xl mx-auto bg-amber-50 shadow-lg p-6 rounded-lg space-y-6">
+      <form className="w-full max-w-2xl mx-auto bg-white shadow-lg p-6 rounded-lg space-y-6">
         <h2 className="text-lg text-amber-700 font-medium">
           We will respond to you as soon as possible
         </h2>

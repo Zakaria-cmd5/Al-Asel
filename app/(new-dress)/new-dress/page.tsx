@@ -5,6 +5,14 @@
 
 import { addDressAction } from "@/actions/addDressAction";
 import MultiValueInput from "@/components/new-dress-page/MultiValueInput";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { CldUploadWidget } from "next-cloudinary";
 import { useState } from "react";
 
@@ -13,13 +21,20 @@ const NewDressPage = () => {
   const [sizes, setSizes] = useState<string[]>([]);
   const [colors, setColors] = useState<string[]>([]);
   const [image, setImage] = useState<any>("");
+  const [category, setCategory] = useState<string>("");
+
+  const handleValueChange = (value: string) => {
+    setCategory(value);
+  };
+
+  console.log(category);
 
   return (
     <form
       action={(formData) =>
         addDressAction(formData, image.secure_url, colors, sizes, dressLengths)
       }
-      className="flex flex-col items-center mt-10 mb-2 p-6 bg-slate-300 rounded-lg shadow-lg w-full max-w-md mx-auto"
+      className="flex flex-col items-center mt-10 mb-2 p-6 bg-white rounded-lg shadow-lg w-full max-w-md mx-auto"
     >
       <h2 className="text-2xl font-bold text-amber-600 mb-6">Add New Dress</h2>
 
@@ -82,6 +97,54 @@ const NewDressPage = () => {
         placeholder="Enter color (e.g., Red, Blue)"
         onValuesChange={setColors}
       />
+
+      <Select onValueChange={handleValueChange}>
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="Select a category" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectItem value="men-dress">Men dress</SelectItem>
+            <SelectItem value="men-underwire">Men underwire</SelectItem>
+            <SelectItem value="men-comfort-dress">Men Comfort dress</SelectItem>
+            <SelectItem value="men-summer-pajamas">
+              Men Summer pajamas
+            </SelectItem>
+            <SelectItem value="men-winter-pajamas">
+              Men Winter pajamas
+            </SelectItem>
+            <SelectItem value="men-winter-dress">Men Winter dress</SelectItem>
+
+            <SelectItem value="youth-underwire">Youth underwire</SelectItem>
+            <SelectItem value="youth-comfort-dress">
+              Youth Comfort dress
+            </SelectItem>
+            <SelectItem value="youth-summer-pajamas">
+              Youth Summer pajamas
+            </SelectItem>
+            <SelectItem value="youth-winter-pajamas">
+              Youth Winter pajamas
+            </SelectItem>
+            <SelectItem value="youth-winter-dress">
+              Youth Winter dress
+            </SelectItem>
+
+            <SelectItem value="kid-underwire">Kid underwire</SelectItem>
+            <SelectItem value="kid-comfort-dress">Kid Comfort dress</SelectItem>
+            <SelectItem value="kid-summer-pajamas">
+              Kid Summer pajamas
+            </SelectItem>
+            <SelectItem value="kid-winter-pajamas">
+              Kid Winter pajamas
+            </SelectItem>
+            <SelectItem value="kid-winter-dress">Kid Winter dress</SelectItem>
+
+            <SelectItem value="1-8">Girl age from 1 - 8</SelectItem>
+            <SelectItem value="9-16">Girl age from 9 - 16</SelectItem>
+            <SelectItem value="women">Women</SelectItem>
+          </SelectGroup>
+        </SelectContent>
+      </Select>
 
       <CldUploadWidget
         uploadPreset="al-aseel"
