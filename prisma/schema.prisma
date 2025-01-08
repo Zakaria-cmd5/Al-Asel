@@ -15,9 +15,10 @@ datasource db {
 
 model Men {
   id          Int    @id @default(autoincrement())
+  image       String
   name        String
   description String
-  dressLength Int
+  dressLength String
   colors      String
   size        String
   quantity    Int    @default(1)
