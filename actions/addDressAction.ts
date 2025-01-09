@@ -82,5 +82,18 @@ export async function addDressAction(
       },
     });
 
+  if (category === "men-comfort-dress")
+    await prisma.menComfortDress.create({
+      data: {
+        colors: colors.join(", "),
+        size: sizes.join(", "),
+        dressLength: dressLength.join(", "),
+        description: validation.data.description,
+        name: validation.data.name,
+        price: validation.data.price,
+        image,
+      },
+    });
+
   redirect("/men");
 }
