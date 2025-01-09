@@ -11,49 +11,59 @@ interface Props {
 }
 
 const ContentSection = ({ data, isVertical }: Props) => {
+  // Limit to 4 items if isVertical is true
+  const displayData = isVertical ? data.slice(0, 4) : data;
+
   return (
     <div
-      className={`flex ${isVertical ? "flex-row ml-10" : "flex-col"} gap-40`}
+      className={`flex ${
+        isVertical
+          ? "flex-row flex-wrap gap-10 ml-10"
+          : "flex-col gap-5 justify-center items-center"
+      } justify-start`}
     >
-      {data?.map((clothe) => (
+      {displayData.map((clothe) => (
         <div
           key={clothe.id}
-          className="flex flex-col items-center justify-center"
+          className="flex flex-col bg-white shadow-lg rounded-lg p-6 w-80"
         >
           {/* Image Section */}
-          <div
-            className={`${
-              isVertical
-                ? "border-2 border-gray-200 p-2"
-                : ""
-            }`}
-          >
+          <div className="w-full mb-4">
             <Image
               src={clothe.image}
-              alt="Man"
-              width={isVertical ? 250 : 400}
-              height={400}
-              className={`${isVertical ? "rounded-lg" : ""}`}
+              alt={clothe.name || "Clothing Image"}
+              width={250}
+              height={300}
+              className="rounded-lg object-cover w-full h-64"
             />
           </div>
 
           {/* Content Section */}
-          <div className="flex flex-col items-center justify-center mt-10">
-            <Link href="/">Men Clothes</Link>
+          <div className="w-full">
+            <Link
+              href="/"
+              className="text-lg font-semibold text-gray-700 hover:text-gray-900"
+            >
+              Men Clothes
+            </Link>
 
-            <p className="text-black font-bold text-2xl">{clothe.price} ر.س</p>
+            <p className="text-gray-800 font-bold text-xl mt-2">
+              {clothe.price} ر.س
+            </p>
 
-            <RadioGroup className="flex mt-2 gap-5">
+            <RadioGroup className="flex mt-4 gap-3">
               {clothe.size?.split(",").map((s) => (
                 <div key={s.trim()} className="flex items-center space-x-2">
                   <RadioGroupItem value={s.trim()} id={`r1-${s.trim()}`} />
-                  <Label htmlFor={`r1-${s.trim()}`}>{s.trim()}</Label>{" "}
+                  <Label htmlFor={`r1-${s.trim()}`} className="text-sm">
+                    {s.trim()}
+                  </Label>
                 </div>
               ))}
             </RadioGroup>
 
-            <button className="bg-[#a07653] hover:bg-[#b16323] text-white p-2 w-full mt-5 flex items-center justify-center">
-              <MdOutlineShoppingCart className="text-2xl" />
+            <button className="bg-[#a07653] hover:bg-[#b16323] text-white p-2 w-full mt-5 flex items-center justify-center rounded-md">
+              <MdOutlineShoppingCart className="text-2xl mr-2" />
               Add to cart
             </button>
           </div>
