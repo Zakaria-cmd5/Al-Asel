@@ -126,10 +126,10 @@ const NewDressPage = () => {
               Youth Comfort dress
             </SelectItem>
             <SelectItem value="youth-summer-pajamas">
-              Youth Summer pajamas
+              Youth summer pajamas
             </SelectItem>
             <SelectItem value="youth-winter-pajamas">
-              Youth Winter pajamas
+              Youth winter pajamas
             </SelectItem>
             <SelectItem value="youth-winter-dress">
               Youth Winter dress
