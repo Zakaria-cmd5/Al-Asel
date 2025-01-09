@@ -150,6 +150,21 @@ export async function addDressAction(
     });
     return redirect("/youth");
   }
-  
+
+  if (category === "youth-comfort-dress") {
+    await prisma.youthComfortDress.create({
+      data: {
+        colors: colors.join(", "),
+        size: sizes.join(", "),
+        dressLength: dressLength.join(", "),
+        description: validation.data.description,
+        name: validation.data.name,
+        price: validation.data.price,
+        image,
+      },
+    });
+    return redirect("/youth");
+  }
+
   redirect("/men");
 }
