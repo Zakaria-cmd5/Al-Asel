@@ -48,3 +48,27 @@ model MenComfortDress {
   price       Int
   quantity    Int    @default(1)
 }
+
+model MenSummerPajamas {
+  id          Int    @id @default(autoincrement())
+  image       String
+  name        String
+  description String
+  dressLength String
+  colors      String
+  size        String
+  price       Int
+  quantity    Int    @default(1)
+}
+
+model MenWinterPajamas {
+  id          Int    @id @default(autoincrement())
+  image       String
+  name        String
+  description String
+  dressLength String
+  colors      String
+  size        String
+  price       Int
+  quantity    Int    @default(1)
+}
