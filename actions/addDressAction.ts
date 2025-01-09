@@ -121,5 +121,20 @@ export async function addDressAction(
       },
     });
 
+  if (category === "youth-dress") {
+    await prisma.youth.create({
+      data: {
+        colors: colors.join(", "),
+        size: sizes.join(", "),
+        dressLength: dressLength.join(", "),
+        description: validation.data.description,
+        name: validation.data.name,
+        price: validation.data.price,
+        image,
+      },
+    });
+    return redirect("/youth");
+  }
+  
   redirect("/men");
 }

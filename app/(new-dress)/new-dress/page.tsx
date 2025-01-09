@@ -120,6 +120,7 @@ const NewDressPage = () => {
             </SelectItem>
             <SelectItem value="men-winter-dress">Men Winter dress</SelectItem>
 
+            <SelectItem value="youth-dress">Youth dress</SelectItem>
             <SelectItem value="youth-underwire">Youth underwire</SelectItem>
             <SelectItem value="youth-comfort-dress">
               Youth Comfort dress
