@@ -17,9 +17,9 @@ import Spinner from "../loading/Spinner";
 const Navbar = () => {
   const navItem = [
     { href: "/men", label: "Men" },
-    { href: "/youths", label: "youths" },
+    { href: "/youth", label: "youths" },
     { href: "/women", label: "Women" },
-    { href: "/kids", label: "Kids" },
+    { href: "/kid", label: "Kids" },
     { href: "/Women-pajamas", label: "Women's pajamas" },
     { href: "/contact", label: "Contact us" },
   ];
