@@ -1,19 +1,18 @@
-'use server'
+"use server";
 
 import prisma from "@/prisma/client";
 import { redirect } from "next/navigation";
 import z from "zod";
 
-
 interface NewDressFormState {
-    errors?: {
-      name?: string[];
-      description?: string[];
-      price?: string[];
-      image?: string[];
-    };
-    message?: string | null;
-  }
+  errors?: {
+    name?: string[];
+    description?: string[];
+    price?: string[];
+    image?: string[];
+  };
+  message?: string | null;
+}
 
 const newDressSchema = z.object({
   name: z
@@ -37,7 +36,8 @@ export async function addDressAction(
   image: string,
   colors: string[],
   sizes: string[],
-  dressLength: string[]
+  dressLength: string[],
+  category: string
 ): Promise<NewDressFormState> {
   const name = formData.get("name");
   const description = formData.get("description");
@@ -56,17 +56,31 @@ export async function addDressAction(
     };
   }
 
-  await prisma.men.create({
-    data: {
-      colors: colors.join(", "),
-      size: sizes.join(", "),
-      dressLength: dressLength.join(", "),
-      description: validation.data.description,
-      name: validation.data.name,
-      price: validation.data.price,
-      image,
-    },
-  });
+  if (category === "men-dress")
+    await prisma.men.create({
+      data: {
+        colors: colors.join(", "),
+        size: sizes.join(", "),
+        dressLength: dressLength.join(", "),
+        description: validation.data.description,
+        name: validation.data.name,
+        price: validation.data.price,
+        image,
+      },
+    });
+
+  if (category === "men-underwire")
+    await prisma.menUnderWire.create({
+      data: {
+        colors: colors.join(", "),
+        size: sizes.join(", "),
+        dressLength: dressLength.join(", "),
+        description: validation.data.description,
+        name: validation.data.name,
+        price: validation.data.price,
+        image,
+      },
+    });
 
   redirect("/men");
 }

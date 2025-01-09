@@ -27,12 +27,17 @@ const NewDressPage = () => {
     setCategory(value);
   };
 
-  console.log(category);
-
   return (
     <form
       action={(formData) =>
-        addDressAction(formData, image.secure_url, colors, sizes, dressLengths)
+        addDressAction(
+          formData,
+          image.secure_url,
+          colors,
+          sizes,
+          dressLengths,
+          category
+        )
       }
       className="flex flex-col items-center mt-10 mb-2 p-6 bg-white rounded-lg shadow-lg w-full max-w-md mx-auto"
     >
