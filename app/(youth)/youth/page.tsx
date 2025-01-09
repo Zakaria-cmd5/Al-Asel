@@ -1,5 +1,5 @@
-import ContentSection from "@/components/men-page/ContentSection";
-import SideSection from "@/components/men-page/SideSection";
+import ContentSection from "@/components/sections/ContentSection";
+import SideSection from "@/components/sections/SideSection";
 import youthImage from "@/public/youth-page/youth-page-image.jpg";
 import { getYouthClothes } from "@/queries/getYouthClothes";
 import { getYouthComfortDress } from "@/queries/getYouthComfortDress";

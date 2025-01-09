@@ -1,5 +1,5 @@
-import ContentSection from "@/components/men-page/ContentSection";
-import SideSection from "@/components/men-page/SideSection";
+import ContentSection from "@/components/sections/ContentSection";
+import SideSection from "@/components/sections/SideSection";
 import { getAlAseelClothes } from "@/queries/getAlAseelClothes";
 import { getMenComfortDress } from "@/queries/getMenComfortDress";
 import { getMenUnderWire } from "@/queries/getMenUnderWire";
