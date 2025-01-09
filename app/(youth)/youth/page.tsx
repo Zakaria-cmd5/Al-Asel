@@ -12,7 +12,7 @@ const YouthPage = async () => {
       <Image src={youthImage} alt="Youth Image" className="w-[50%] mx-auto" />
 
       <div className="grid grid-cols-[200px_1fr] h-auto mt-20">
-        <SideSection heading="Winter Dress" href="/" linkLabel="Show All" />
+        <SideSection heading="Youth Dress" href="/" linkLabel="Show All" />
         <ContentSection data={youthClothes} isVertical />
       </div>
     </div>
