@@ -20,12 +20,28 @@ const ContentSection = ({ data, isVertical }: Props) => {
           key={clothe.id}
           className="flex flex-col items-center justify-center"
         >
-          <Image src={clothe.image} alt="Man" width={400} height={400} />
+          {/* Image Section */}
+          <div
+            className={`${
+              isVertical
+                ? "border-2 border-gray-200 p-2"
+                : ""
+            }`}
+          >
+            <Image
+              src={clothe.image}
+              alt="Man"
+              width={isVertical ? 250 : 400}
+              height={400}
+              className={`${isVertical ? "rounded-lg" : ""}`}
+            />
+          </div>
 
+          {/* Content Section */}
           <div className="flex flex-col items-center justify-center mt-10">
             <Link href="/">Men Clothes</Link>
 
-            <p className="text-red-600 font-bold text-2xl">{clothe.price}</p>
+            <p className="text-black font-bold text-2xl">{clothe.price} ر.س</p>
 
             <RadioGroup className="flex mt-2 gap-5">
               {clothe.size?.split(",").map((s) => (
