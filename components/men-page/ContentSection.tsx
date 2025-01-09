@@ -12,7 +12,9 @@ interface Props {
 
 const ContentSection = ({ data, isVertical }: Props) => {
   return (
-    <div className={`flex ${isVertical ? " flex-row" : "flex-col"} gap-40`}>
+    <div
+      className={`flex ${isVertical ? "flex-row ml-10" : "flex-col"} gap-40`}
+    >
       {data?.map((clothe) => (
         <div
           key={clothe.id}
