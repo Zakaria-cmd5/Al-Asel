@@ -121,7 +121,9 @@ const NewDressPage = () => {
             <SelectItem value="men-winter-dress">Men Winter dress</SelectItem>
 
             <SelectItem value="youth-dress">Youth dress</SelectItem>
-            <SelectItem value="youth-underwire">Youth underwire age 9 - 16</SelectItem>
+            <SelectItem value="youth-underwire">
+              Youth underwire age 9 - 16
+            </SelectItem>
             <SelectItem value="youth-comfort-dress">
               Youth Comfort dress
             </SelectItem>
@@ -135,6 +137,7 @@ const NewDressPage = () => {
               Youth Winter dress
             </SelectItem>
 
+            <SelectItem value="kid-dress">Kid dress</SelectItem>
             <SelectItem value="kid-underwire">Kid underwire</SelectItem>
             <SelectItem value="kid-comfort-dress">Kid Comfort dress</SelectItem>
             <SelectItem value="kid-summer-pajamas">
