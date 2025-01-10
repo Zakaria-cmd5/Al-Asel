@@ -226,5 +226,50 @@ export async function addDressAction(
     return redirect("/kid");
   }
 
+  if (category === "kid-comfort-dress") {
+    await prisma.kidComfortDress.create({
+      data: {
+        colors: colors.join(", "),
+        size: sizes.join(", "),
+        dressLength: dressLength.join(", "),
+        description: validation.data.description,
+        name: validation.data.name,
+        price: validation.data.price,
+        image,
+      },
+    });
+    return redirect("/kid");
+  }
+
+  if (category === "kid-winter-pajamas") {
+    await prisma.kidWinterPajamas.create({
+      data: {
+        colors: colors.join(", "),
+        size: sizes.join(", "),
+        dressLength: dressLength.join(", "),
+        description: validation.data.description,
+        name: validation.data.name,
+        price: validation.data.price,
+        image,
+      },
+    });
+    return redirect("/kid");
+  }
+
+  if (category === "kid-winter-dress") {
+    await prisma.kidWinterDress.create({
+      data: {
+        colors: colors.join(", "),
+        size: sizes.join(", "),
+        dressLength: dressLength.join(", "),
+        description: validation.data.description,
+        name: validation.data.name,
+        price: validation.data.price,
+        image,
+      },
+    });
+    return redirect("/kid");
+  }
+
   redirect("/men");
 }
