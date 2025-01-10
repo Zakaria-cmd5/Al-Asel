@@ -156,3 +156,39 @@ model KidUnderWire {
   price       Int
   quantity    Int    @default(1)
 }
+
+model KidComfortDress {
+  id          Int    @id @default(autoincrement())
+  image       String
+  name        String
+  description String
+  dressLength String
+  colors      String
+  size        String
+  price       Int
+  quantity    Int    @default(1)
+}
+
+model KidWinterDress {
+  id          Int    @id @default(autoincrement())
+  image       String
+  name        String
+  description String
+  dressLength String
+  colors      String
+  size        String
+  price       Int
+  quantity    Int    @default(1)
+}
+
+model KidWinterPajamas {
+  id          Int    @id @default(autoincrement())
+  image       String
+  name        String
+  description String
+  dressLength String
+  colors      String
+  size        String
+  price       Int
+  quantity    Int    @default(1)
+}
