@@ -1,6 +1,6 @@
 "use client";
 
-import { PropsWithChildren } from "react";
+import React, { PropsWithChildren } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -10,15 +10,17 @@ import { Swiper as SwiperComponent, SwiperSlide } from "swiper/react";
 const Swiper = ({ children }: PropsWithChildren) => {
   return (
     <SwiperComponent
-      spaceBetween={50}
-      slidesPerView={5}
+      spaceBetween={20} // Adjusted for better spacing between slides
+      slidesPerView={5} // Number of slides to show
       navigation={true}
       pagination={{ clickable: true }}
       scrollbar={{ draggable: true }}
       modules={[Pagination, Navigation]}
       className="w-[80%]"
     >
-      <SwiperSlide className="flex">{children}</SwiperSlide>
+      {React.Children.toArray(children).map((child, index) => (
+        <SwiperSlide key={index}>{child}</SwiperSlide>
+      ))}
     </SwiperComponent>
   );
 };
