@@ -14,10 +14,7 @@ const SwiperContent = ({ data }: Props) => {
   return (
     <Swiper>
       {data.map((clothe) => (
-        <div
-          key={clothe.id}
-          className="flex flex-col bg-white shadow-lg rounded-lg p-6 w-80"
-        >
+        <div key={clothe.id} className="mb-10 mt-14">
           {/* Image Section */}
           <div className="w-full mb-4">
             <Image
