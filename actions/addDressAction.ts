@@ -196,5 +196,20 @@ export async function addDressAction(
     return redirect("/youth");
   }
 
+  if (category === "kid-dress") {
+    await prisma.kid.create({
+      data: {
+        colors: colors.join(", "),
+        size: sizes.join(", "),
+        dressLength: dressLength.join(", "),
+        description: validation.data.description,
+        name: validation.data.name,
+        price: validation.data.price,
+        image,
+      },
+    });
+    return redirect("/kid");
+  }
+
   redirect("/men");
 }
