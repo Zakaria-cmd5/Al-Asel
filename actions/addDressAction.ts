@@ -211,5 +211,20 @@ export async function addDressAction(
     return redirect("/kid");
   }
 
+  if (category === "kid-underwire") {
+    await prisma.kidUnderWire.create({
+      data: {
+        colors: colors.join(", "),
+        size: sizes.join(", "),
+        dressLength: dressLength.join(", "),
+        description: validation.data.description,
+        name: validation.data.name,
+        price: validation.data.price,
+        image,
+      },
+    });
+    return redirect("/kid");
+  }
+
   redirect("/men");
 }
