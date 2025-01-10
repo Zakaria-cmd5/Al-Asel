@@ -20,7 +20,6 @@ const Navbar = () => {
     { href: "/youth", label: "youths" },
     { href: "/women", label: "Women" },
     { href: "/kid", label: "Kids" },
-    { href: "/Women-pajamas", label: "Women's pajamas" },
     { href: "/contact", label: "Contact us" },
   ];
 
