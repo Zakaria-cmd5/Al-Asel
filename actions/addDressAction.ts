@@ -271,5 +271,50 @@ export async function addDressAction(
     return redirect("/kid");
   }
 
+  if (category === "girl-1-8") {
+    await prisma.youngGirl.create({
+      data: {
+        colors: colors.join(", "),
+        size: sizes.join(", "),
+        dressLength: dressLength.join(", "),
+        description: validation.data.description,
+        name: validation.data.name,
+        price: validation.data.price,
+        image,
+      },
+    });
+    return redirect("/women");
+  }
+
+  if (category === "girl-9-16") {
+    await prisma.girl.create({
+      data: {
+        colors: colors.join(", "),
+        size: sizes.join(", "),
+        dressLength: dressLength.join(", "),
+        description: validation.data.description,
+        name: validation.data.name,
+        price: validation.data.price,
+        image,
+      },
+    });
+    return redirect("/women");
+  }
+
+  if (category === "women") {
+    await prisma.women.create({
+      data: {
+        colors: colors.join(", "),
+        size: sizes.join(", "),
+        dressLength: dressLength.join(", "),
+        description: validation.data.description,
+        name: validation.data.name,
+        price: validation.data.price,
+        image,
+      },
+    });
+    return redirect("/women");
+  }
+
   redirect("/men");
 }
