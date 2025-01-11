@@ -1,36 +1,33 @@
 import ContentSection from "@/components/sections/ContentSection";
 import SideSection from "@/components/sections/SideSection";
-import { getAlAseelClothes } from "@/queries/getAlAseelClothes";
-import { getMenComfortDress } from "@/queries/getMenComfortDress";
-import { getMenUnderWire } from "@/queries/getMenUnderWire";
-import { getMenWinterPajamas } from "@/queries/getMenWinterPajamas";
+import { getAllDress } from "@/queries/getAllDress";
 
 const MenPage = async () => {
-  const menClothes = await getAlAseelClothes();
-  const menUnderWire = await getMenUnderWire();
-  const menComfortDress = await getMenComfortDress();
-  const menWinterPajamas = await getMenWinterPajamas();
+  const menThoube = await getAllDress("MEN", "THOUB");
+  const menUnderWire = await getAllDress("MEN", "UNDER_WIRE");
+  const menComfortThoub = await getAllDress("MEN", "COMFORT_THOUB");
+  const menWinterPajamas = await getAllDress("MEN", "WINTER_PAJAMAS");
 
   return (
     <div className="flex flex-col">
       <div className="grid grid-cols-[200px_1fr] h-auto mt-20">
-        <SideSection heading="Alaseel Clothes" href="/" linkLabel="Show All" />
-        <ContentSection data={menClothes} />
+        <SideSection heading="Thoub Alaseel" href="/" linkLabel="Show All" />
+        <ContentSection category="men" data={menThoube} />
       </div>
 
       <div className="grid grid-cols-[200px_1fr] h-auto mt-20">
         <SideSection heading="Underwire" href="/" linkLabel="Show All" />
-        <ContentSection data={menUnderWire} isVertical />
+        <ContentSection category="men" data={menUnderWire} isVertical />
       </div>
 
       <div className="grid grid-cols-[200px_1fr] h-auto mt-20">
-        <SideSection heading="Comfort Dress" href="/" linkLabel="Show All" />
-        <ContentSection data={menComfortDress} isVertical />
+        <SideSection heading="Comfort Thoub" href="/" linkLabel="Show All" />
+        <ContentSection category="men" data={menComfortThoub} isVertical />
       </div>
 
       <div className="grid grid-cols-[200px_1fr] h-auto mt-20">
         <SideSection heading="Winter Dress" href="/" linkLabel="Show All" />
-        <ContentSection data={menWinterPajamas} isVertical />
+        <ContentSection category="men" data={menWinterPajamas} isVertical />
       </div>
     </div>
   );

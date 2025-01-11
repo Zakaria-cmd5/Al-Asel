@@ -1,15 +1,13 @@
 import ContentSection from "@/components/sections/ContentSection";
 import SideSection from "@/components/sections/SideSection";
 import youthImage from "@/public/youth-page/youth-page-image.jpg";
-import { getYouthClothes } from "@/queries/getYouthClothes";
-import { getYouthComfortDress } from "@/queries/getYouthComfortDress";
-import { getYouthUnderwire } from "@/queries/getYouthUnderwire";
+import { getAllDress } from "@/queries/getAllDress";
 import Image from "next/image";
 
 const YouthPage = async () => {
-  const youthClothes = await getYouthClothes();
-  const youthUnderwire = await getYouthUnderwire();
-  const youthComfortDress = await getYouthComfortDress();
+  const youthThoub = await getAllDress("YOUTH", "THOUB");
+  const youthUnderwire = await getAllDress("YOUTH", "UNDER_WIRE");
+  const youthComfortThoub = await getAllDress("YOUTH", "COMFORT_THOUB");
 
   return (
     <div className="mt-10 flex flex-col gap-10">
@@ -17,12 +15,12 @@ const YouthPage = async () => {
 
       <div className="grid grid-cols-[200px_1fr] h-auto mt-20">
         <SideSection heading="Youth Dress" href="/" linkLabel="Show All" />
-        <ContentSection data={youthClothes} isVertical />
+        <ContentSection category="youth" data={youthThoub} isVertical />
       </div>
 
       <div className="grid grid-cols-[200px_1fr] h-auto mt-20">
         <SideSection heading="Youth Underwire" href="/" linkLabel="Show All" />
-        <ContentSection data={youthUnderwire} isVertical />
+        <ContentSection category="youth" data={youthUnderwire} isVertical />
       </div>
 
       <div className="grid grid-cols-[200px_1fr] h-auto mt-20">
@@ -31,7 +29,7 @@ const YouthPage = async () => {
           href="/"
           linkLabel="Show All"
         />
-        <ContentSection data={youthComfortDress} isVertical />
+        <ContentSection category="youth" data={youthComfortThoub} isVertical />
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { MenClothesType } from "@/types/menClothesType";
+import { DressType } from "@/types/DressType";
 import Image from "next/image";
 import Link from "next/link";
 import { MdOutlineShoppingCart } from "react-icons/md";
@@ -6,10 +6,11 @@ import { Label } from "../ui/label";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 
 interface Props {
-  data: MenClothesType[];
+  data: DressType[];
+  category: string;
 }
 
-const Content = ({ data }: Props) => {
+const Content = async ({ data, category }: Props) => {
   return (
     <>
       {data.map((clothe) => (
@@ -18,7 +19,7 @@ const Content = ({ data }: Props) => {
           className="flex flex-col bg-white shadow-lg rounded-lg p-6 w-80"
         >
           {/* Image Section */}
-          <div className="w-full mb-4">
+          <Link href={`/${category}/${clothe.id}`} className="w-full mb-4">
             <Image
               src={clothe.image}
               alt={clothe.name || "Clothing Image"}
@@ -26,13 +27,13 @@ const Content = ({ data }: Props) => {
               height={300}
               className="rounded-lg object-cover w-full h-64"
             />
-          </div>
+          </Link>
 
           {/* Content Section */}
           <div className="w-full">
             <Link
-              href="/"
-              className="text-lg font-semibold text-gray-700 hover:text-gray-900"
+              href={`/${category}/${clothe.id}`}
+              className="text-lg font-semibold text-gray-700 hover:text-[#a07653]"
             >
               Men Clothes
             </Link>
@@ -42,11 +43,11 @@ const Content = ({ data }: Props) => {
             </p>
 
             <RadioGroup className="flex mt-4 gap-3">
-              {clothe.size?.split(",").map((s) => (
-                <div key={s.trim()} className="flex items-center space-x-2">
-                  <RadioGroupItem value={s.trim()} id={`r1-${s.trim()}`} />
-                  <Label htmlFor={`r1-${s.trim()}`} className="text-sm">
-                    {s.trim()}
+              {clothe.sizes?.map((s) => (
+                <div key={s.id} className="flex items-center space-x-2">
+                  <RadioGroupItem value={s.name} id={`r1-${s.name}`} />
+                  <Label htmlFor={`r1-${s.name}`} className="text-sm">
+                    {s.name}
                   </Label>
                 </div>
               ))}

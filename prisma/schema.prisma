@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,218 +7,50 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Men {
-  id          Int    @id @default(autoincrement())
-  image       String
-  name        String
-  description String
-  dressLength String
-  colors      String
-  size        String
-  price       Int
-  quantity    Int    @default(1)
+model Dress {
+  id           Int            @id @default(autoincrement())
+  image        String
+  name         String
+  description  String?
+  price        Int
+  quantity     Int            @default(1)
+  mainCategory MainCategory
+  subCategory  SubCategory
+  dressLength  Dress_Length[] @relation("DressLength")
+  colors       Color[]        @relation("DressColors")
+  sizes        Size[]         @relation("DressSizes")
 }
 
-model MenUnderWire {
-  id          Int    @id @default(autoincrement())
-  image       String
-  name        String
-  description String
-  dressLength String
-  colors      String
-  size        String
-  price       Int
-  quantity    Int    @default(1)
+model Color {
+  id      Int     @id @default(autoincrement())
+  name    String
+  dresses Dress[] @relation("DressColors")
 }
 
-model MenComfortDress {
-  id          Int    @id @default(autoincrement())
-  image       String
-  name        String
-  description String
-  dressLength String
-  colors      String
-  size        String
-  price       Int
-  quantity    Int    @default(1)
+model Size {
+  id      Int     @id @default(autoincrement())
+  name    String
+  dresses Dress[] @relation("DressSizes")
 }
 
-model MenSummerPajamas {
-  id          Int    @id @default(autoincrement())
-  image       String
-  name        String
-  description String
-  dressLength String
-  colors      String
-  size        String
-  price       Int
-  quantity    Int    @default(1)
+model Dress_Length {
+  id      Int     @id @default(autoincrement())
+  name    String
+  dresses Dress[] @relation("DressLength")
 }
 
-model MenWinterPajamas {
-  id          Int    @id @default(autoincrement())
-  image       String
-  name        String
-  description String
-  dressLength String
-  colors      String
-  size        String
-  price       Int
-  quantity    Int    @default(1)
+enum MainCategory {
+  MEN
+  WOMEN
+  KID
+  YOUTH
 }
 
-model Youth {
-  id          Int    @id @default(autoincrement())
-  image       String
-  name        String
-  description String
-  dressLength String
-  colors      String
-  size        String
-  price       Int
-  quantity    Int    @default(1)
-}
-
-model YouthUnderWire {
-  id          Int    @id @default(autoincrement())
-  image       String
-  name        String
-  description String
-  dressLength String
-  colors      String
-  size        String
-  price       Int
-  quantity    Int    @default(1)
-}
-
-model YouthComfortDress {
-  id          Int    @id @default(autoincrement())
-  image       String
-  name        String
-  description String
-  dressLength String
-  colors      String
-  size        String
-  price       Int
-  quantity    Int    @default(1)
-}
-
-model YouthSummerPajamas {
-  id          Int    @id @default(autoincrement())
-  image       String
-  name        String
-  description String
-  dressLength String
-  colors      String
-  size        String
-  price       Int
-  quantity    Int    @default(1)
-}
-
-model YouthWinterPajamas {
-  id          Int    @id @default(autoincrement())
-  image       String
-  name        String
-  description String
-  dressLength String
-  colors      String
-  size        String
-  price       Int
-  quantity    Int    @default(1)
-}
-
-model Kid {
-  id          Int    @id @default(autoincrement())
-  image       String
-  name        String
-  description String
-  dressLength String
-  colors      String
-  size        String
-  price       Int
-  quantity    Int    @default(1)
-}
-
-model KidUnderWire {
-  id          Int    @id @default(autoincrement())
-  image       String
-  name        String
-  description String
-  dressLength String
-  colors      String
-  size        String
-  price       Int
-  quantity    Int    @default(1)
-}
-
-model KidComfortDress {
-  id          Int    @id @default(autoincrement())
-  image       String
-  name        String
-  description String
-  dressLength String
-  colors      String
-  size        String
-  price       Int
-  quantity    Int    @default(1)
-}
-
-model KidWinterDress {
-  id          Int    @id @default(autoincrement())
-  image       String
-  name        String
-  description String
-  dressLength String
-  colors      String
-  size        String
-  price       Int
-  quantity    Int    @default(1)
-}
-
-model KidWinterPajamas {
-  id          Int    @id @default(autoincrement())
-  image       String
-  name        String
-  description String
-  dressLength String
-  colors      String
-  size        String
-  price       Int
-  quantity    Int    @default(1)
-}
-
-model Women {
-  id          Int    @id @default(autoincrement())
-  image       String
-  name        String
-  description String
-  dressLength String
-  colors      String
-  size        String
-  price       Int
-  quantity    Int    @default(1)
-}
-
-model Girl {
-  id          Int    @id @default(autoincrement())
-  image       String
-  name        String
-  description String
-  dressLength String
-  colors      String
-  size        String
-  price       Int
-  quantity    Int    @default(1)
-}
-
-model YoungGirl {
-  id          Int    @id @default(autoincrement())
-  image       String
-  name        String
-  description String
-  dressLength String
-  colors      String
-  size        String
-  price       Int
-  quantity    Int    @default(1)
+enum SubCategory {
+  THOUB
+  UNDER_WIRE
+  WINTER_PAJAMAS
+  SUMMER_PAJAMAS
+  COMFORT_THOUB
+  WINTER_THOUB
 }

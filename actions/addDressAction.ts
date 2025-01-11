@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 
 import prisma from "@/prisma/client";
@@ -37,11 +38,12 @@ export async function addDressAction(
   colors: string[],
   sizes: string[],
   dressLength: string[],
-  category: string
+  mainCategory: string,
+  subCategory: string
 ): Promise<NewDressFormState> {
-  const name = formData.get("name");
-  const description = formData.get("description");
-  const price = formData.get("price");
+  const name = formData.get("name") as string;
+  const description = formData.get("description") as string;
+  const price = formData.get("price") as string;
 
   const validation = newDressSchema.safeParse({
     name,
@@ -56,265 +58,25 @@ export async function addDressAction(
     };
   }
 
-  if (category === "men-dress")
-    await prisma.men.create({
-      data: {
-        colors: colors.join(", "),
-        size: sizes.join(", "),
-        dressLength: dressLength.join(", "),
-        description: validation.data.description,
-        name: validation.data.name,
-        price: validation.data.price,
-        image,
+  await prisma.dress.create({
+    data: {
+      name: validation.data.name,
+      description: validation.data.description,
+      price: validation.data.price,
+      image,
+      dressLength: {
+        create: dressLength.map((length) => ({ name: length })),
       },
-    });
-
-  if (category === "men-underwire")
-    await prisma.menUnderWire.create({
-      data: {
-        colors: colors.join(", "),
-        size: sizes.join(", "),
-        dressLength: dressLength.join(", "),
-        description: validation.data.description,
-        name: validation.data.name,
-        price: validation.data.price,
-        image,
+      mainCategory: mainCategory.toUpperCase() as any,
+      subCategory: subCategory.toUpperCase() as any,
+      colors: {
+        create: colors.map((color) => ({ name: color })),
       },
-    });
-
-  if (category === "men-comfort-dress")
-    await prisma.menComfortDress.create({
-      data: {
-        colors: colors.join(", "),
-        size: sizes.join(", "),
-        dressLength: dressLength.join(", "),
-        description: validation.data.description,
-        name: validation.data.name,
-        price: validation.data.price,
-        image,
+      sizes: {
+        create: sizes.map((size) => ({ name: size })),
       },
-    });
+    },
+  });
 
-  if (category === "men-summer-pajamas")
-    await prisma.menSummerPajamas.create({
-      data: {
-        colors: colors.join(", "),
-        size: sizes.join(", "),
-        dressLength: dressLength.join(", "),
-        description: validation.data.description,
-        name: validation.data.name,
-        price: validation.data.price,
-        image,
-      },
-    });
-
-  if (category === "men-winter-pajamas")
-    await prisma.menWinterPajamas.create({
-      data: {
-        colors: colors.join(", "),
-        size: sizes.join(", "),
-        dressLength: dressLength.join(", "),
-        description: validation.data.description,
-        name: validation.data.name,
-        price: validation.data.price,
-        image,
-      },
-    });
-
-  if (category === "youth-dress") {
-    await prisma.youth.create({
-      data: {
-        colors: colors.join(", "),
-        size: sizes.join(", "),
-        dressLength: dressLength.join(", "),
-        description: validation.data.description,
-        name: validation.data.name,
-        price: validation.data.price,
-        image,
-      },
-    });
-    return redirect("/youth");
-  }
-
-  if (category === "youth-underwire") {
-    await prisma.youthUnderWire.create({
-      data: {
-        colors: colors.join(", "),
-        size: sizes.join(", "),
-        dressLength: dressLength.join(", "),
-        description: validation.data.description,
-        name: validation.data.name,
-        price: validation.data.price,
-        image,
-      },
-    });
-    return redirect("/youth");
-  }
-
-  if (category === "youth-comfort-dress") {
-    await prisma.youthComfortDress.create({
-      data: {
-        colors: colors.join(", "),
-        size: sizes.join(", "),
-        dressLength: dressLength.join(", "),
-        description: validation.data.description,
-        name: validation.data.name,
-        price: validation.data.price,
-        image,
-      },
-    });
-    return redirect("/youth");
-  }
-
-  if (category === "youth-summer-pajamas") {
-    await prisma.youthSummerPajamas.create({
-      data: {
-        colors: colors.join(", "),
-        size: sizes.join(", "),
-        dressLength: dressLength.join(", "),
-        description: validation.data.description,
-        name: validation.data.name,
-        price: validation.data.price,
-        image,
-      },
-    });
-    return redirect("/youth");
-  }
-
-  if (category === "youth-winter-pajamas") {
-    await prisma.youthWinterPajamas.create({
-      data: {
-        colors: colors.join(", "),
-        size: sizes.join(", "),
-        dressLength: dressLength.join(", "),
-        description: validation.data.description,
-        name: validation.data.name,
-        price: validation.data.price,
-        image,
-      },
-    });
-    return redirect("/youth");
-  }
-
-  if (category === "kid-dress") {
-    await prisma.kid.create({
-      data: {
-        colors: colors.join(", "),
-        size: sizes.join(", "),
-        dressLength: dressLength.join(", "),
-        description: validation.data.description,
-        name: validation.data.name,
-        price: validation.data.price,
-        image,
-      },
-    });
-    return redirect("/kid");
-  }
-
-  if (category === "kid-underwire") {
-    await prisma.kidUnderWire.create({
-      data: {
-        colors: colors.join(", "),
-        size: sizes.join(", "),
-        dressLength: dressLength.join(", "),
-        description: validation.data.description,
-        name: validation.data.name,
-        price: validation.data.price,
-        image,
-      },
-    });
-    return redirect("/kid");
-  }
-
-  if (category === "kid-comfort-dress") {
-    await prisma.kidComfortDress.create({
-      data: {
-        colors: colors.join(", "),
-        size: sizes.join(", "),
-        dressLength: dressLength.join(", "),
-        description: validation.data.description,
-        name: validation.data.name,
-        price: validation.data.price,
-        image,
-      },
-    });
-    return redirect("/kid");
-  }
-
-  if (category === "kid-winter-pajamas") {
-    await prisma.kidWinterPajamas.create({
-      data: {
-        colors: colors.join(", "),
-        size: sizes.join(", "),
-        dressLength: dressLength.join(", "),
-        description: validation.data.description,
-        name: validation.data.name,
-        price: validation.data.price,
-        image,
-      },
-    });
-    return redirect("/kid");
-  }
-
-  if (category === "kid-winter-dress") {
-    await prisma.kidWinterDress.create({
-      data: {
-        colors: colors.join(", "),
-        size: sizes.join(", "),
-        dressLength: dressLength.join(", "),
-        description: validation.data.description,
-        name: validation.data.name,
-        price: validation.data.price,
-        image,
-      },
-    });
-    return redirect("/kid");
-  }
-
-  if (category === "girl-1-8") {
-    await prisma.youngGirl.create({
-      data: {
-        colors: colors.join(", "),
-        size: sizes.join(", "),
-        dressLength: dressLength.join(", "),
-        description: validation.data.description,
-        name: validation.data.name,
-        price: validation.data.price,
-        image,
-      },
-    });
-    return redirect("/women");
-  }
-
-  if (category === "girl-9-16") {
-    await prisma.girl.create({
-      data: {
-        colors: colors.join(", "),
-        size: sizes.join(", "),
-        dressLength: dressLength.join(", "),
-        description: validation.data.description,
-        name: validation.data.name,
-        price: validation.data.price,
-        image,
-      },
-    });
-    return redirect("/women");
-  }
-
-  if (category === "women") {
-    await prisma.women.create({
-      data: {
-        colors: colors.join(", "),
-        size: sizes.join(", "),
-        dressLength: dressLength.join(", "),
-        description: validation.data.description,
-        name: validation.data.name,
-        price: validation.data.price,
-        image,
-      },
-    });
-    return redirect("/women");
-  }
-
-  redirect("/men");
+  redirect(`/${mainCategory.toLowerCase()}`);
 }

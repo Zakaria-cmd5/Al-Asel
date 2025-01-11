@@ -1,22 +1,23 @@
 import Swiper from "@/components/custom-ui/Swiper";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { MenClothesType } from "@/types/menClothesType";
+import { DressType } from "@/types/DressType";
 import Image from "next/image";
 import Link from "next/link";
 import { MdOutlineShoppingCart } from "react-icons/md";
 
 interface Props {
-  data: MenClothesType[];
+  data: DressType[];
+  category: string;
 }
 
-const SwiperContent = ({ data }: Props) => {
+const SwiperContent = ({ data, category }: Props) => {
   return (
     <Swiper>
       {data.map((clothe) => (
         <div key={clothe.id} className="mb-10 mt-14">
           {/* Image Section */}
-          <div className="w-full mb-4">
+          <Link href={`/${category}/${clothe.id}`} className="w-full mb-4">
             <Image
               src={clothe.image}
               alt={clothe.name || "Clothing Image"}
@@ -24,12 +25,12 @@ const SwiperContent = ({ data }: Props) => {
               height={300}
               className="rounded-lg object-cover w-full h-64"
             />
-          </div>
+          </Link>
 
           {/* Content Section */}
           <div className="w-full">
             <Link
-              href="/"
+              href={`/${category}/${clothe.id}`}
               className="text-lg font-semibold text-gray-700 hover:text-gray-900"
             >
               Men Clothes
@@ -40,11 +41,11 @@ const SwiperContent = ({ data }: Props) => {
             </p>
 
             <RadioGroup className="flex mt-4 gap-3">
-              {clothe.size?.split(",").map((s) => (
-                <div key={s.trim()} className="flex items-center space-x-2">
-                  <RadioGroupItem value={s.trim()} id={`r1-${s.trim()}`} />
-                  <Label htmlFor={`r1-${s.trim()}`} className="text-sm">
-                    {s.trim()}
+              {clothe.sizes?.map((s) => (
+                <div key={s.id} className="flex items-center space-x-2">
+                  <RadioGroupItem value={s.name} id={`r1-${s.name}`} />
+                  <Label htmlFor={`r1-${s.name}`} className="text-sm">
+                    {s.name}
                   </Label>
                 </div>
               ))}

@@ -1,13 +1,14 @@
-import { MenClothesType } from "@/types/menClothesType";
+import { DressType } from "@/types/DressType";
 import Content from "./Content";
 import SwiperContent from "./SwiperContent";
 
 interface Props {
   isVertical?: boolean;
-  data: MenClothesType[];
+  data: DressType[];
+  category: string;
 }
 
-const ContentSection = ({ data, isVertical }: Props) => {
+const ContentSection = ({ data, isVertical, category }: Props) => {
   return (
     <div
       className={`flex ${
@@ -17,9 +18,9 @@ const ContentSection = ({ data, isVertical }: Props) => {
       }`}
     >
       {data.length > 4 ? (
-        <SwiperContent data={data} />
+        <SwiperContent category={category} data={data} />
       ) : (
-        <Content data={data} />
+        <Content data={data} category={category} />
       )}
     </div>
   );

@@ -4,15 +4,8 @@
 "use client";
 
 import { addDressAction } from "@/actions/addDressAction";
+import FormSelect from "@/components/custom-ui/FormSelect";
 import MultiValueInput from "@/components/new-dress-page/MultiValueInput";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { CldUploadWidget } from "next-cloudinary";
 import { useState } from "react";
 
@@ -21,10 +14,15 @@ const NewDressPage = () => {
   const [sizes, setSizes] = useState<string[]>([]);
   const [colors, setColors] = useState<string[]>([]);
   const [image, setImage] = useState<any>("");
-  const [category, setCategory] = useState<string>("");
+  const [mainCategory, setMainCategory] = useState<string>("");
+  const [subCategory, setSubCategory] = useState<string>("");
 
-  const handleValueChange = (value: string) => {
-    setCategory(value);
+  const mainCategoryValueChange = (value: string) => {
+    setMainCategory(value);
+  };
+
+  const subCategoryValueChange = (value: string) => {
+    setSubCategory(value);
   };
 
   return (
@@ -36,12 +34,13 @@ const NewDressPage = () => {
           colors,
           sizes,
           dressLengths,
-          category
+          mainCategory,
+          subCategory
         )
       }
       className="flex flex-col items-center mt-10 mb-2 p-6 bg-white rounded-lg shadow-lg w-full max-w-md mx-auto"
     >
-      <h2 className="text-2xl font-bold text-amber-600 mb-6">Add New Dress</h2>
+      <h2 className="text-2xl font-bold text-amber-600 mb-6">Add New Item</h2>
 
       <div className="w-full mb-4">
         <label htmlFor="name" className="block text-amber-700 font-medium mb-1">
@@ -103,54 +102,10 @@ const NewDressPage = () => {
         onValuesChange={setColors}
       />
 
-      <Select onValueChange={handleValueChange}>
-        <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Select a category" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectItem value="men-dress">Men dress</SelectItem>
-            <SelectItem value="men-underwire">Men underwire</SelectItem>
-            <SelectItem value="men-comfort-dress">Men Comfort dress</SelectItem>
-            <SelectItem value="men-summer-pajamas">
-              Men Summer pajamas
-            </SelectItem>
-            <SelectItem value="men-winter-pajamas">
-              Men Winter pajamas
-            </SelectItem>
-            <SelectItem value="men-winter-dress">Men Winter dress</SelectItem>
-
-            <SelectItem value="youth-dress">Youth dress</SelectItem>
-            <SelectItem value="youth-underwire">
-              Youth underwire age 9 - 16
-            </SelectItem>
-            <SelectItem value="youth-comfort-dress">
-              Youth Comfort dress
-            </SelectItem>
-            <SelectItem value="youth-summer-pajamas">
-              Youth summer pajamas
-            </SelectItem>
-            <SelectItem value="youth-winter-pajamas">
-              Youth winter pajamas
-            </SelectItem>
-            <SelectItem value="youth-winter-dress">
-              Youth Winter dress
-            </SelectItem>
-
-            <SelectItem value="kid-dress">Kid dress</SelectItem>
-            <SelectItem value="kid-underwire">Kid underwire</SelectItem>
-            <SelectItem value="kid-comfort-dress">Kid Comfort dress</SelectItem>
-            <SelectItem value="kid-winter-pajamas">
-              Kid Winter pajamas
-            </SelectItem>
-            <SelectItem value="kid-winter-dress">Kid Winter dress</SelectItem>
-
-            <SelectItem value="girl-1-8">Girl age from 1 - 8</SelectItem>
-            <SelectItem value="girl-9-16">Girl age from 9 - 16</SelectItem>
-            <SelectItem value="women">Women</SelectItem>
-          </SelectGroup>
-        </SelectContent>
-      </Select>
+      <FormSelect
+        mainCategoryValueChange={mainCategoryValueChange}
+        subCategoryValueChange={subCategoryValueChange}
+      />
 
       <CldUploadWidget
         uploadPreset="al-aseel"
