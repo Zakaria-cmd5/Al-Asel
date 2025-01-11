@@ -10,13 +10,13 @@ import pic7 from "../../public/MainPictures/pic7.jpg";
 import pic8 from "../../public/MainPictures/pic8.jpg";
 import pic9 from "../../public/MainPictures/pic9.jpg";
 
+import Link from "next/link";
 import {
   FaFacebookF,
   FaInstagram,
   FaSnapchatGhost,
   FaTwitter,
 } from "react-icons/fa";
-import Link from "next/link";
 
 const HeroSection = () => {
   return (
@@ -24,28 +24,28 @@ const HeroSection = () => {
       <div className="flex  flex-col col:1 justify-start items-center p-6">
         <Image src={pic1} alt="العرض الحالي" className="  rounded-lg " />
 
-        <Link href={"nafl"}>
+        <Link href="/">
           <Image
             src={pic2}
             alt="ثياب الاصيل الشتوية"
             className="rounded-lg mt-3"
           />
         </Link>
-        <Link href={"nafl"}>
+        <Link href="/">
           <Image
             src={pic3}
             alt="البيجامات الشتوية"
             className="rounded-lg mt-3"
           />
         </Link>
-        <Link href={"nafl"}>
+        <Link href="/">
           <Image src={pic4} alt="ثياب الراحة" className="rounded-lg mt-3" />
         </Link>
-        <Link href={"nafl"}>
+        <Link href="/">
           <Image src={pic5} alt="Assil's dress" className="rounded-lg mt-3" />
         </Link>
         <div className=" flex flex-row jusify-center item-start mt-3 ">
-          <Link href={"nafl"}>
+          <Link href="/">
             <Image
               src={pic6}
               width={730}
@@ -53,7 +53,7 @@ const HeroSection = () => {
               className="rounded-lg mr-3"
             />
           </Link>
-          <Link href={"nafl"}>
+          <Link href="/">
             <Image
               width={730}
               src={pic7}
