@@ -19,7 +19,7 @@ const Content = async ({ data, category }: Props) => {
           className="flex flex-col bg-white shadow-lg rounded-lg p-6 w-80"
         >
           {/* Image Section */}
-          <Link href={`/${category}/${clothe.id}`} className="w-full mb-4">
+          <Link href={`/${category}/${clothe.id}/${clothe.subCategory}`} className="w-full mb-4">
             <Image
               src={clothe.image}
               alt={clothe.name || "Clothing Image"}
@@ -32,7 +32,7 @@ const Content = async ({ data, category }: Props) => {
           {/* Content Section */}
           <div className="w-full">
             <Link
-              href={`/${category}/${clothe.id}`}
+              href={`/${category}/${clothe.id}/${clothe.subCategory}`}
               className="text-lg font-semibold text-gray-700 hover:text-[#a07653]"
             >
               {clothe.name}
