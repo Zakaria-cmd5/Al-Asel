@@ -7,6 +7,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id        String   @id // Use Clerk's user ID as the primary key
+  email     String   @unique
+  firstName String?
+  lastName  String?
+  image     String?
+  role      Role     @default(USER) // Use the Role enum
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
 model Dress {
   id           Int            @id @default(autoincrement())
   image        String
