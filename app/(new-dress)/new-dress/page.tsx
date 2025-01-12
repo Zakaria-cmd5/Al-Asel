@@ -70,6 +70,18 @@ const NewDressPage = () => {
       </div>
 
       <div className="w-full mb-4">
+        <label htmlFor="name" className="block text-amber-700 font-medium mb-1">
+          Product Code
+        </label>
+        <input
+          type="text"
+          name="code"
+          placeholder="Enter dress name"
+          className="w-full px-4 py-2 border border-amber-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400"
+        />
+      </div>
+
+      <div className="w-full mb-4">
         <label
           htmlFor="price"
           className="block text-amber-700 font-medium mb-1"

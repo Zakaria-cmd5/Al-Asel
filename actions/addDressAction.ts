@@ -10,6 +10,7 @@ interface NewDressFormState {
     name?: string[];
     description?: string[];
     price?: string[];
+    code?: string[];
     image?: string[];
   };
   message?: string | null;
@@ -19,12 +20,17 @@ const newDressSchema = z.object({
   name: z
     .string()
     .min(3, "Product name is too short")
-    .max(20, "Product name is too long")
+    .max(100, "Product name is too long") // Increased max length
     .trim(),
   description: z
     .string()
     .min(3, "Description is too short")
-    .max(255, "Description is too long")
+    .max(1000, "Description is too long") // Increased max length
+    .trim(),
+  code: z
+    .string()
+    .min(3, "Product code is too short")
+    .max(50, "Product code is too long") // Increased max length
     .trim(),
   price: z
     .string()
@@ -43,18 +49,44 @@ export async function addDressAction(
 ): Promise<NewDressFormState> {
   const name = formData.get("name") as string;
   const description = formData.get("description") as string;
+  const code = formData.get("code") as string;
   const price = formData.get("price") as string;
+
+  console.log("Form Data:");
+  console.log({
+    name,
+    description,
+    code,
+    price,
+    image,
+    colors,
+    sizes,
+    dressLength,
+    mainCategory,
+    subCategory,
+  });
 
   const validation = newDressSchema.safeParse({
     name,
     description,
+    code,
     price,
   });
 
   if (!validation.success) {
+    console.error("Validation Errors:", validation.error.flatten().fieldErrors);
     return {
       errors: validation.error.flatten().fieldErrors,
       message: "Please enter valid fields",
+    };
+  }
+
+  if (!image) {
+    return {
+      errors: {
+        image: ["Please upload an image before submitting."],
+      },
+      message: "Validation failed",
     };
   }
 
@@ -63,6 +95,7 @@ export async function addDressAction(
       name: validation.data.name,
       description: validation.data.description,
       price: validation.data.price,
+      dressCode: validation.data.code,
       image,
       dressLength: {
         create: dressLength.map((length) => ({ name: length })),

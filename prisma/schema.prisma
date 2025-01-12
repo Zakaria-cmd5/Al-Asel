@@ -11,8 +11,9 @@ model Dress {
   id           Int            @id @default(autoincrement())
   image        String
   name         String
-  description  String?
+  description  String         @db.Text
   price        Int
+  dressCode    String
   quantity     Int            @default(1)
   mainCategory MainCategory
   subCategory  SubCategory
