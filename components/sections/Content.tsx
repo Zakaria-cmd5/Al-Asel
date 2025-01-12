@@ -35,7 +35,7 @@ const Content = async ({ data, category }: Props) => {
               href={`/${category}/${clothe.id}`}
               className="text-lg font-semibold text-gray-700 hover:text-[#a07653]"
             >
-              Men Clothes
+              {clothe.name}
             </Link>
 
             <p className="text-gray-800 font-bold text-xl mt-2">
