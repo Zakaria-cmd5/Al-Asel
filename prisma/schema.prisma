@@ -12,6 +12,7 @@ model User {
   email     String   @unique
   firstName String?
   lastName  String?
+  userName  String?
   image     String?
   role      Role     @default(USER) // Use the Role enum
   createdAt DateTime @default(now())
