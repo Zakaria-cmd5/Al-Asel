@@ -4,6 +4,8 @@ import youthImage from "@/public/youth-page/youth-page-image.jpg";
 import { getAllDress } from "@/queries/getAllDress";
 import Image from "next/image";
 
+export const dynamic = "force-dynamic";
+
 const KidPage = async () => {
   const kidThoub = await getAllDress("KID", "THOUB");
   const kidUnderwire = await getAllDress("KID", "UNDER_WIRE");
