@@ -29,7 +29,7 @@ const MenDetailPage = async (props: { params: Params }) => {
       <div className="flex flex-col gap-5">
         <div className="flex flex-col gap-4">
           <p className="text-2xl font-bold text-black">{dress.name}</p>
-          <p className="text-sm text-gray-400">{dress.dressCode}</p>
+          <p className="text-sm text-gray-400">Product code : {dress.dressCode}</p>
         </div>
 
         <div className="flex gap-10 items-center">

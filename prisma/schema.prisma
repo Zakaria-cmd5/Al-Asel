@@ -55,3 +55,21 @@ enum SubCategory {
   COMFORT_THOUB
   WINTER_THOUB
 }
+
+model Cart {
+  id        Int        @id @default(autoincrement())
+  userId    String
+  items     CartItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@unique([userId])
+}
+
+model CartItem {
+  id       Int    @id @default(autoincrement())
+  cartId   Int
+  product  String
+  quantity Int
+  cart     Cart   @relation(fields: [cartId], references: [id], onDelete: Cascade)
+}
